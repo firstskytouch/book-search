@@ -58,5 +58,5 @@ export const getBooks = async (searchKey: string) => {
 export const getBookDetail = async (isbn: string) => {
   const res = await axios.get(`${API_BASE}/api/volumes/brief/isbn/${isbn}.json`);
   const data = res.data;
-  return [];
+  return data;
 };

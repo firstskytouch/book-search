@@ -17,21 +17,18 @@ const Home = () => {
   const [orderBy, setOrderBy] = React.useState<KeyType>('title');
 
   React.useEffect(() => {
-    handleSearch();
+    handleSearch(searchKey);
   }, [searchKey]);
 
-  const debouncedSave = React.useCallback(
-    _.debounce(nextValue => setSearchKey(nextValue), DEBOUNCE_DELAY),
-    []
-  );
+  const debouncedSave = _.debounce(nextValue => setSearchKey(nextValue), DEBOUNCE_DELAY);
 
-  const handleSearch = async () => {
+  const handleSearch = async (key: string) => {
     setBooks([]);
-    if (!searchKey) {
+    if (!key) {
       return;
     }
     setLoading(true);
-    const result = await getBooks(searchKey);
+    const result = await getBooks(key);
     setBooks(result);
     setLoading(false);
   };
